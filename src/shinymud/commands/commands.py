@@ -303,8 +303,8 @@ inventory, you might want to be more specific as to which place you look in:
         return None
     
 
-command_list.register(Look, ['look', 'read'])
-command_help.register(Look.help, ['look', 'read'])
+command_list.register(Look, ['look', 'l', 'read'])
+command_help.register(Look.help, ['look', 'l', 'read'])
 
 class Goto(BaseCommand):
     """Go to a location."""
