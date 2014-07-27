@@ -12,7 +12,7 @@ crontab -e
 
 Add a new entry to your crontab file that calls the shinycron.py file, like
 this one:
-0 * * * * python /home/someuser/shinymud/src/shinymud/data/shinycron.py
+*/5 * * * * python /root/git/ShinyMUD/src/shinymud/data/shinycron.py 
 
 That one calls the shinycron.py file every hour. Make sure you include the
 absolute path to the shinycron.py file, or things won't work.
@@ -75,4 +75,5 @@ file to help you figure out what went wrong. Good luck!\n"""
 else:
     # The server hasn't been started yet, or was shut down on purpose. No action
     # necessary.
-    pass
+    result = start()
+    # pass
