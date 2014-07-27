@@ -3,6 +3,7 @@ from shinymud.lib.connection_handlers.shiny_connections import *
 
 import threading
 import socket
+import time
 
 class WebsocketHandler(threading.Thread):
     
@@ -122,10 +123,13 @@ class StatSender(threading.Thread):
                 conn, info = self.listener.accept()
                 # Send them the game-stats!
                 plist = ','.join([name for name in self.world.player_list if isinstance(name, basestring)])
-                conn.send(str(self.world.uptime) + ':' + plist)
+                if not plist:
+                  plist = "None"
+                uptime = int((time.time()-self.world.uptime)/60)
+                conn.send("\n===Status===") 
+                conn.send("\nUptime:" + str(uptime) + " minutes") 
+                conn.send("\n" + str("Players Connected: "+ plist))
+                conn.send("\n") 
                 conn.close()
             except Exception, e:
                 self.world.log.error('StatSender ERROR: ' + str(e))
-    
-
-
